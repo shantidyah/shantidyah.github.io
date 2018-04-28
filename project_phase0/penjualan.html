@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="tampilan.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+	<nav>
+	    <ul>
+	       <!-- <li><a href="#">Home</a></li> -->
+	       <li><a href="#" onclick="Stock('jenisbarangmasuk','stock_tabel');">Stock</a></li>
+	       <li><a href="#" onclick="Penjualan('jenisbarang','jumlahbarang');">Penjualan</a></li>
+	    </ul>
+	</nav>
+
+
+	<table border='0' class="tampung">
+		<tr>
+			<td>
+				<div id="stock" style="display:none;">
+					<!--stock barang-->
+					<h2><br>Nama Barang : </br>
+						<select id="jenisbarangmasuk"></select>
+					</h2>
+					<h2><br>Banyak Barang : </br>
+						<input type="number" id="banyakbarang" name="barangmasuk" value="" min="1"/>
+					</h2>
+					<button id="simpan" onclick="simpanstock()">Simpan</button>
+				</div>
+
+				<!--penjualan-->
+				<div id='penjualan' style="display:none;">
+					<h1>Penjualan</h1>
+					<h2><br>Nama Barang :
+							<select id='jenisbarang'></select>
+					</h2>
+					<h2><br>Jumlah Barang :
+						<input type="number" id="jumlahbarang" name="jumlahbarangdibeli" value='' min="1"  onkeyup="totharga('jenisbarang','jumlahbarang')"/>
+					</h2>
+
+					<div>
+						<h2><br>Total Harga
+								<p id="totalharga"></p>
+						</h2>
+						<h2><br>Pembayaran
+								<input type="number" id="pembayaran" name="pembayaran" value='' min='0' onkeyup="kembalian('totalharga','pembayaran')"/>
+						</h2>
+						<h2><br>Kembalian
+								<p id="sisa"></p>
+						</h2>
+						<button id="simpan2" onclick="total('sisa','jumlahbarang',jenisbarang)">Simpan</button>
+					</div>
+				</div>
+
+
+			</td>
+			<td>
+				<div id="stock2" style="display:none;">
+					<!--stock barang-->
+				<table class='stock' border="2" id="stock_tabel">
+					<tr>
+						<th>kd_barang</th>
+						<th>nama_barang</th>
+						<th>stock</th>
+						<th>harga</th>
+					</tr>
+				</table>
+				</div>
+
+				<!--penjualan-->
+				<div id='laporan' style="display:none;">
+
+				</div>
+
+			</td>
+		</tr>
+	</table>
+
+	<script src="stock.js"></script>
+
+</body>
+</html>
