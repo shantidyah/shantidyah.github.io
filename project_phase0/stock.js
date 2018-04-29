@@ -121,7 +121,7 @@ function total(a,b,c,d) {
   var jml = document.getElementById('jumlahbarang').value;
   var jenisbarang = document.getElementById('jenisbarang').value;
   var table = document.getElementById('tabel_pembelian');
-  ifkembalian ==''||parseInt(kembalian)<0){
+  if(kembalian ==''||parseInt(kembalian)<0){
     alert('uang tidak cukup');
     return false;
   }
