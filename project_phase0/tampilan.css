@@ -37,19 +37,21 @@ iframe {
   width: 50%;
   height: 550px;
 }
-.tampung{
 
-  height:100%;
-  width:100%;
-}
-.tampung tr td{
+.stock{
   width: 50%;
 }
 
-.stock{
-  width: 100%;
+.tabel_pembelian{
+  width: 50%;
+}
+.home{
+  text-align: center;
 }
 
-.buttontotal{
-  margin-left: 50%;
+.penjualan{
+  text-align: center;
+}
+.tabel_pembelian{
+  margin: auto;
 }

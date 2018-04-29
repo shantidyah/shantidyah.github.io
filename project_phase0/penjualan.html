@@ -7,16 +7,19 @@
 <body>
 	<nav>
 	    <ul>
-	       <!-- <li><a href="#">Home</a></li> -->
+	       <li><a href="#" onclick="home();">Home</a></li>
 	       <li><a href="#" onclick="Stock('jenisbarangmasuk','stock_tabel');">Stock</a></li>
 	       <li><a href="#" onclick="Penjualan('jenisbarang','jumlahbarang');">Penjualan</a></li>
 	    </ul>
 	</nav>
 
+	<div id="home" class="home">
+		<h1>Welcome</h1>
+		<img src="logo-hacktiv8.png"/>
+		<h1><br>Project Phase0</h1>
+		<h1><br>Stock Barang dan Penjualan</h1>
+	</div>
 
-	<table border='0' class="tampung">
-		<tr>
-			<td>
 				<div id="stock" style="display:none;">
 					<!--stock barang-->
 					<h2><br>Nama Barang : </br>
@@ -28,36 +31,9 @@
 					<button id="simpan" onclick="simpanstock()">Simpan</button>
 				</div>
 
-				<!--penjualan-->
-				<div id='penjualan' style="display:none;">
-					<h1>Penjualan</h1>
-					<h2><br>Nama Barang :
-							<select id='jenisbarang'></select>
-					</h2>
-					<h2><br>Jumlah Barang :
-						<input type="number" id="jumlahbarang" name="jumlahbarangdibeli" value='' min="1"  onkeyup="totharga('jenisbarang','jumlahbarang')"/>
-					</h2>
-
-					<div>
-						<h2><br>Total Harga
-								<p id="totalharga"></p>
-						</h2>
-						<h2><br>Pembayaran
-								<input type="number" id="pembayaran" name="pembayaran" value='' min='0' onkeyup="kembalian('totalharga','pembayaran')"/>
-						</h2>
-						<h2><br>Kembalian
-								<p id="sisa"></p>
-						</h2>
-						<button id="simpan2" onclick="total('sisa','jumlahbarang',jenisbarang)">Simpan</button>
-					</div>
-				</div>
-
-
-			</td>
-			<td>
 				<div id="stock2" style="display:none;">
 					<!--stock barang-->
-				<table class='stock' border="2" id="stock_tabel">
+				<br><table class='stock' border="2" id="stock_tabel">
 					<tr>
 						<th>kd_barang</th>
 						<th>nama_barang</th>
@@ -67,14 +43,38 @@
 				</table>
 				</div>
 
-				<!--penjualan-->
-				<div id='laporan' style="display:none;">
+	<div id='penjualan' class="penjualan" style="display:none;">
+		<!--Penjualan-->
+		<h1>Penjualan</h1>
+		<h2><br>Nama Barang :
+				<select id='jenisbarang'></select>
+		</h2>
+		<h2><br>Jumlah Barang :
+			<input type="number" id="jumlahbarang" name="jumlahbarangdibeli" value='' min="1"  onchange="banyakpembelian('jenisbarang','jumlahbarang','tabel_pembelian')"/>
+		</h2>
 
-				</div>
+		<table border="2" id="tabel_pembelian" class="tabel_pembelian"><br>
+			<tr>
+				<th>kd_barang</th>
+				<th>nama_barang</th>
+				<th>banyak</th>
+				<th>harga</th>
+			</tr>
+		</table>
+		<div>
+			<h2><br>Total Harga
+					<p id="totalharga">0</p>
+			</h2>
+			<h2><br>Pembayaran
+					<input type="number" id="pembayaran" name="pembayaran" value='' min='0' onkeyup="kembalian('totalharga','pembayaran')"/>
+			</h2>
+			<h2><br>Kembalian
+					<p id="sisa"></p>
+			</h2>
+			<button id="simpan2" onclick="total('sisa','jumlahbarang','jenisbarang','tabel_pembelian')">Simpan</button>
+		</div>
+	</div>
 
-			</td>
-		</tr>
-	</table>
 
 	<script src="stock.js"></script>
 

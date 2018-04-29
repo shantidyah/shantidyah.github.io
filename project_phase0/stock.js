@@ -18,8 +18,15 @@ var kategori_barang =
     barang  : "Jaket",
     stock : 150,
     harga : 250000
-  }
+  },
+  {
+    kd_barang : '004',
+    barang  : "Sepatu",
+    stock : 170,
+    harga : 500000}
 ];
+var banyak_barang = {'001':0,'002':0,'003':0,'004':0};
+
 
 function tambahstock(a) {
   var selectBox = document.getElementById(a);
@@ -63,65 +70,94 @@ function simpanstock() {
   }
   stockbarang('stock_tabel');
 }
-function totharga(a,b){
-  var nama_barang = document.getElementById(a).value;
-  var jml_barang = document.getElementById(b).value;
-  var total = 0;
 
+function banyakpembelian(a,b,c){
+    var nama_barang = document.getElementById(a).value;
+    var jml_barang = document.getElementById(b).value;
+    var table = document.getElementById(c);
+    var totalharga = document.getElementById('totalharga').innerHTML;
+    totalharga = parseInt(totalharga);
+    jml_barang = parseInt(jml_barang);
+    var value = 0;
+      for(var key in banyak_barang){
+        if(nama_barang===key){
+          banyak_barang[key] += jml_barang;
+        }
+      }
+      var row = table.insertRow(value+1);
+      var total = 0;
+      for(var j = 0; j < kategori_barang.length; j++){
+        if(nama_barang===kategori_barang[j].kd_barang){
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          var cell4 = row.insertCell(3);
+          cell1.innerHTML = kategori_barang[j].kd_barang;
+          cell2.innerHTML = kategori_barang[j].barang;
+          cell3.innerHTML = jml_barang;
+          total=jml_barang*kategori_barang[j].harga;
+          cell4.innerHTML = total;
+        }
 
-  for (var i = 0; i < kategori_barang.length; i++) {
-    if(nama_barang===kategori_barang[i].kd_barang){
-      total=parseInt(jml_barang)*kategori_barang[i].harga;
-    }
-  }
-  if(isNaN(total)){
-    total=0;
-  }
-  document.getElementById('totalharga').innerHTML = total;
+      }
+      total += totalharga;
+      // console.log(total);
+      document.getElementById('totalharga').innerHTML = total;
+      console.log(banyak_barang);
 }
+
+
 
 function kembalian(a,b) {
   var total = document.getElementById(a).innerHTML;
   var bayar = document.getElementById(b).value;
   var hasil = 0;
   hasil = parseInt(bayar) - parseInt(total);
-  console.log(total);
-  console.log(bayar);
   document.getElementById('sisa').innerHTML = hasil;
 }
 
-function total(a,b,c) {
+function total(a,b,c,d) {
   var kembalian = document.getElementById('sisa').innerHTML;
   var jml = document.getElementById('jumlahbarang').value;
   var jenisbarang = document.getElementById('jenisbarang').value;
-  if(parseInt(kembalian)<0){
+  var table = document.getElementById('tabel_pembelian');
+  ifkembalian ==''||parseInt(kembalian)<0){
     alert('uang tidak cukup');
     return false;
   }
   else {
     for(var i = 0; i < kategori_barang.length; i++){
-      if(jenisbarang===kategori_barang[i].kd_barang){
-        if(parseInt(jml)<=kategori_barang[i].stock){
-          kategori_barang[i].stock -= parseInt(jml);
+      for (var key in banyak_barang) {
+        if(key==kategori_barang[i].kd_barang){
+          if(banyak_barang[key]<=kategori_barang[i].stock){
+            kategori_barang[i].stock -= banyak_barang[key];
+          }
+          else {
+                alert('barang tidak cukup');
+                return false;
+          }
         }
-        else {
-          alert('barang tidak cukup');
-          return false;
-        }
+
       }
     }
     alert('pembelian berhasil');
   }
-
 }
-// total('sisa','jumlahbarang',jenisbarang)
+// total('sisa','jumlahbarang',jenisbarang,tabel_pembelian)
+function home(){
+  var a = document.getElementById('stock').style.display = 'none';
+  var b = document.getElementById('stock2').style.display = 'none';
+  var c = document.getElementById('penjualan').style.display = 'none';
+  var d = document.getElementById('home').style.display = '';
+}
 function Stock(a,b) {
     stockbarang(b);
     tambahstock(a);
     var a = document.getElementById('stock').style.display = '';
     var b = document.getElementById('stock2').style.display = '';
     var c = document.getElementById('penjualan').style.display = 'none';
-    var d = document.getElementById('laporan').style.display = 'none';
+    var d = document.getElementById('home').style.display = 'none';
+
 }
 function Penjualan(a,b) {
     tambahstock(a);
@@ -129,5 +165,5 @@ function Penjualan(a,b) {
     var a = document.getElementById('stock').style.display = 'none';
     var b = document.getElementById('stock2').style.display = 'none';
     var c = document.getElementById('penjualan').style.display = '';
-    var d = document.getElementById('laporan').style.display = '';
+    var d = document.getElementById('home').style.display = 'none';
 }
